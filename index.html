@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rock Paper Scissors</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+<div class="game">
+    <h1>Rock Paper Scissors</h1>
+    <div class="options">
+        <button onclick="playGame('rock')">
+        <img src="images/rock.jpeg" alt="Rock">
+    </button>
+    <button onclick="playGame('paper')">
+        <img src="images/paper.jpeg" alt="Paper">
+    </button>
+    <button onclick="playGame('scissors')">
+        <img src="images/scissors.jpeg" alt="Scissors">
+    </button>
+    </div>
+    <div class="choices">
+    <div id="playerChoice">
+        <h2>Your Pick</h2>
+        <img id="playerPick" src="" alt="">
+    </div>
+    <div id="computerChoice">
+        <h2>Enemy's Pick</h2>
+        <img id="computerPick" src="" alt="">
+    </div>
+    </div>
+    <div id="result"></div>
+
+    <div id="score">
+        <h2>SCORE</h2>
+        <p>Player: <span id="player-score">0</span></p>
+        <p>Computer: <span id="computer-score">0</span></p>
+    </div>
+</div>
+
+
+<script>
+    let playerScore = 0;
+    let computerScore = 0;
+
+function playGame(playerChoice) {
+    const choices = ['rock', 'paper', 'scissors'];
+    const computerChoice = choices[Math.floor(Math.random() * 3)];
+    
+    // Update player's and computer's picks
+    document.getElementById('playerPick').src = `images/${playerChoice}.jpeg`;
+    document.getElementById('computerPick').src = `images/${computerChoice}.jpeg`;
+    
+    // Determine the result
+    let result = '';
+
+    if (playerChoice === computerChoice) {
+        result = "IT'S A TIE!";
+
+
+    } else if (
+        (playerChoice === 'rock' && computerChoice === 'scissors') ||
+        (playerChoice === 'paper' && computerChoice === 'rock') ||
+        (playerChoice === 'scissors' && computerChoice === 'paper')
+    ) {
+        result = 'YOU WIN!';
+        playerScore++;
+    } else {
+        result = 'COMPUTER WINS!';
+        computerScore++;
+    }
+
+    // Display the result
+    document.getElementById('result').innerText = result;
+    document.getElementById('player-score').innerText = playerScore;
+    document.getElementById('computer-score').innerText = computerScore;
+    }
+</script>
+</body>
+</html>
